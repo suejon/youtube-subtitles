@@ -16,7 +16,7 @@ test("fetches caption at specific time", () => {
   const caption = {
     text: "Hello",
     start: 0,
-    end: 1,
+    duration: 1,
   };
   const value = get_subtitle([caption], 10);
   expect(value.text).toBe("Hello");

@@ -1,21 +1,40 @@
-import { Caption } from "./types";
+import { WATCH_URL } from "./constants";
+import { Caption, TranscriptsMeta } from "./types";
+import { isTranscripsMeta } from "./utils";
+
+export async function get_transcripts_for_video(
+  video_id: string,
+  language: string = "en"
+) {
+  const transcriptsMeta = await list_transcripts(video_id);
+  const transcriptLang = transcriptsMeta.translationLanguages.filter(
+    (lang) => lang.languageCode === language
+  );
+  if (transcriptLang.length === 0) {
+    throw new Error("No transcript found for language: " + language);
+  }
+  let url = transcriptsMeta.captionTracks[0]?.baseUrl;
+  if (url === undefined) {
+    throw new Error("No transcript URL found");
+  }
+  // retrieve translated captions for target language
+  if (language !== "en") {
+    url = url + "&tlang=" + language;
+  }
+  return fetch_transcript(url);
+}
 
 /**
  *  Retrieves the video transcript for a given language.
- *  @param {string} video_url - The URL of the video
- *  @param {string} language - e.g. en, fr, es en,
+ *  @param {string} url - The URL of the transcript (this is not the video url)
  *  @return {Promise<Caption[]> | undefined} An object containing the transcript for the given language
  */
 export async function fetch_transcript(
-  video_url: string,
-  language: string = "en"
+  url: string
 ): Promise<Caption[] | undefined> {
   // retrieve translated captions for target language
-  if (language !== "en") {
-    video_url = video_url + "&tlang=" + language;
-  }
 
-  const timed_text = await fetch(video_url, {
+  const timed_text = await fetch(url, {
     headers: { "Accept-Language": "en-us" },
   });
   const html = await timed_text.text();
@@ -64,6 +83,57 @@ export function get_subtitle(
   video_curr_time: number
 ): Caption | undefined {
   return subtitles.filter((s) => s.start < video_curr_time).at(-1);
+}
+
+/**
+ *  Retrieves the available captions for a given video.
+ *  @param {string} video_id - The video's unique ID.
+ *  @return {TranscriptsMeta} An object of available captions.
+ */
+async function list_transcripts(video_id: string): Promise<TranscriptsMeta> {
+  console.log("fetching transcripts for video id: ", video_id);
+  const data = await fetch(WATCH_URL + video_id, {
+    headers: { "Accept-Language": "en-us" },
+  });
+  const html = await data.text();
+  const captions = extract_json(html);
+  if (!isTranscripsMeta(captions)) {
+    throw new Error("error extracting captions");
+  }
+  return captions as TranscriptsMeta;
+}
+
+/**
+ * Extracts the JSON object containing the captions from the HTML.
+ * @param {string} html - The HTML of the YouTube video page.
+ * @return {object} The JSON object containing the captions.
+ * @throws {Error} If the captions cannot be found.
+ */
+function extract_json(html: string): object {
+  const split_html = html.split(/"captions":/);
+
+  if (split_html.length === 1) {
+    throw new Error("captions not found");
+  }
+  try {
+    const captions_text = split_html[1]
+      ?.split(',"videoDetails"')[0]
+      ?.replace("\n", "");
+    if (!captions_text) {
+      throw new Error("captions not found");
+    }
+
+    const captions_json =
+      JSON.parse(captions_text).playerCaptionsTracklistRenderer;
+
+    if (!captions_json) {
+      throw new Error("captions not found");
+    }
+
+    return captions_json;
+  } catch (error) {
+    throw new Error("captions not found");
+  }
 }
 
 /**
