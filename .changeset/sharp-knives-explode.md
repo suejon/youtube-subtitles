@@ -1,5 +1,0 @@
----
-"youtube-captions": minor
----
-
-init
