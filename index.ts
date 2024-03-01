@@ -1,33 +1,21 @@
-import { Caption, CaptionMetadata } from "./types";
+import { Caption } from "./types";
 
 /**
  *  Retrieves the video transcript for a given language.
- *  @param {object} meta caption metadata
+ *  @param {string} video_url - The URL of the video
  *  @param {string} language - e.g. en, fr, es en,
  *  @return {Promise<Caption[]> | undefined} An object containing the transcript for the given language
  */
 export async function fetch_transcript(
-  meta: CaptionMetadata,
+  video_url: string,
   language: string = "en"
 ): Promise<Caption[] | undefined> {
-  const transcript = meta.translationLanguages.filter(
-    (lang) => lang.languageCode === language
-  );
-  if (!transcript) {
-    throw new Error("language not found");
-  }
-
-  let url = meta.captionTracks[0]?.baseUrl;
-  if (!url) {
-    throw new Error("no caption track found");
-  }
-
   // retrieve translated captions for target language
   if (language !== "en") {
-    url = url + "&tlang=" + language;
+    video_url = video_url + "&tlang=" + language;
   }
 
-  const timed_text = await fetch(url, {
+  const timed_text = await fetch(video_url, {
     headers: { "Accept-Language": "en-us" },
   });
   const html = await timed_text.text();
