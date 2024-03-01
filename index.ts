@@ -1,14 +1,4 @@
-type CaptionMetadata = {
-  translationLanguages: Array<{
-    languageCode: string;
-  }>;
-  captionTracks: Array<{ baseUrl: string }>;
-};
-type Caption = {
-  text: string;
-  start: number;
-  duration: number;
-};
+import { Caption, CaptionMetadata } from "./types";
 
 /**
  *  Retrieves the video transcript for a given language.
@@ -81,7 +71,7 @@ export async function fetch_transcript(
  * @param {number} video_curr_time - The current time of the video
  * @return {string} The subtitle text to display
  */
-function getSubtitle(
+export function getSubtitle(
   subtitles: Caption[],
   video_curr_time: number
 ): Caption | undefined {
