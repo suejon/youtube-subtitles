@@ -59,7 +59,7 @@ export async function fetch_transcript(
  * @param {number} video_curr_time - The current time of the video
  * @return {string} The subtitle text to display
  */
-export function getSubtitle(
+export function get_subtitle(
   subtitles: Caption[],
   video_curr_time: number
 ): Caption | undefined {
