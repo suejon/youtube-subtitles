@@ -14,10 +14,10 @@ npm install @suejon/youtube-subtitles
 
 The `video_id` can be found in the url of the video. For example, in the url `https://www.youtube.com/watch?v=abcdef`, the `video_id` is `abcdef`.
 
-Here is an example of fetching french subtitles for a video:
+Here is an example of fetching chinese subtitles for a video:
 
 ```javascript
-const subtitles = await get_subtitles_for_video("video_id", "fr");
+const subtitles = await get_subtitles_for_video("video_id", "cn");
 ```
 
 If the language is not specified, it defaults to english ("en"). Valid codes are in the [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) format.

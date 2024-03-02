@@ -1,5 +1,13 @@
 {
   "name": "@suejon/youtube-subtitles",
+  "keywords": [
+    "youtube",
+    "captions",
+    "subtitles",
+    "api",
+    "typescript",
+    "javascript"
+  ],
   "publishConfig": {
     "access": "public"
   },
