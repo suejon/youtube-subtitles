@@ -2,7 +2,7 @@ import { WATCH_URL } from "./constants";
 import { Caption, TranscriptsMeta } from "./types";
 import { isTranscripsMeta } from "./utils";
 
-export async function get_transcripts_for_video(
+export async function get_subtitles_for_video(
   video_id: string,
   language: string = "en"
 ) {
