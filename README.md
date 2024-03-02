@@ -1,6 +1,6 @@
-# Youtube Captions
+# Youtube Subtitles
 
-A zero dependency tool for downloading youtube captions.
+A zero dependency tool for downloading youtube subtitles.
 
 ## How to install
 
@@ -43,3 +43,7 @@ Response:
 ```javascript
 ["en", "fr", "es", "de", "ro", "sr", "sk", "sl", "sv", "uk"];
 ```
+
+### Feedback
+
+If you have any open issues or feature requests, please feel free to open an issue on the [github repository](https://github.com/suejon/youtube-subtitles)
