@@ -10,9 +10,9 @@ npm install @suejon/youtube-subtitles
 
 ## How to use
 
-### Fetch subtitles for a video
-
 The `video_id` can be found in the url of the video. For example, in the url `https://www.youtube.com/watch?v=abcdef`, the `video_id` is `abcdef`.
+
+### Fetch subtitles for a video
 
 Here is an example of fetching chinese subtitles for a video:
 
@@ -30,4 +30,16 @@ The subtitles will be an array of objects, each object representing the subtitle
   dur: 6,
   text: "one of the great fish of the world to"
 }
+```
+
+### Fetch available subtitle languages for a video
+
+```javascript
+const languages = await get_available_languages("video_id");
+```
+
+Response:
+
+```javascript
+["en", "fr", "es", "de", "ro", "sr", "sk", "sl", "sv", "uk"];
 ```
