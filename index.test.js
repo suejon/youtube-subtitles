@@ -1,6 +1,6 @@
 import { expect } from "vitest";
 import { test } from "vitest";
-import { get_subtitle, fetch_transcript } from "./index";
+import { get_subtitle, fetch_transcript } from "./utils";
 import { vi } from "vitest";
 
 global.fetch = vi.fn();
