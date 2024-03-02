@@ -1,5 +1,11 @@
 # youtube-captions
 
+## 0.4.0
+
+### Minor Changes
+
+- 318b216: add get avialable subtitle languages for video
+
 ## 0.3.0
 
 ### Minor Changes
