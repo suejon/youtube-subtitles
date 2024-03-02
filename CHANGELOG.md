@@ -1,5 +1,11 @@
 # youtube-captions
 
+## 0.4.1
+
+### Patch Changes
+
+- 369c87e: update package information
+
 ## 0.4.0
 
 ### Minor Changes
