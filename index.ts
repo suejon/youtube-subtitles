@@ -21,3 +21,10 @@ export async function get_subtitles_for_video(
   }
   return fetch_transcript(url);
 }
+
+export async function get_available_languages(
+  video_id: string
+): Promise<string[]> {
+  const transcriptsMeta = await list_transcripts(video_id);
+  return transcriptsMeta.translationLanguages.map((x) => x.languageCode);
+}
