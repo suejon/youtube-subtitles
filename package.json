@@ -1,8 +1,5 @@
 {
   "name": "@suejon/youtube-subtitles",
-  "publishConfig": {
-    "access": "public"
-  },
   "license": "MIT",
   "version": "0.2.0",
   "main": "dist/index.js",
