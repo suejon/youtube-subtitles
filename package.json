@@ -1,5 +1,5 @@
 {
-  "name": "youtube-subtitles",
+  "name": "@suejon/youtube-subtitles",
   "publishConfig": {
     "access": "public"
   },
