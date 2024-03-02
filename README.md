@@ -5,7 +5,7 @@ A zero dependency tool for downloading youtube captions.
 ## How to install
 
 ```bash
-npm install youtube-subtitles
+npm install @suejon/youtube-subtitles
 ```
 
 ## How to use
