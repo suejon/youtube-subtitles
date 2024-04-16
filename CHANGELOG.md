@@ -1,5 +1,11 @@
 # youtube-captions
 
+## 0.4.2
+
+### Patch Changes
+
+- add license
+
 ## 0.4.1
 
 ### Patch Changes
